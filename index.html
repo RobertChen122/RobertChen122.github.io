@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chufan Chen 作品集</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Prata&family=Share+Tech&family=Noto+Serif+SC:wght@400;600&display=swap">
+<style>
+/* Layout: Carbonmade-style single column — centered serif name, slash nav, one 2:1 cover per project; detail pages = title, meta strip, hero, narrow text column, full-width media. */
+:root{
+  --ground:#b1d7dd;      /* pale lake teal, carried over from the old site */
+  --ground-deep:#9ccbd2;
+  --ink:#141b1d;
+  --ink-soft:#3c5357;
+  --rule:#86b6be;
+  --paper:#e9f4f6;
+  --display:"Playfair Display","Noto Serif SC",Georgia,serif;
+  --body:Prata,"Noto Serif SC","Songti SC",Georgia,serif;
+  --tech:"Share Tech","Noto Serif SC",ui-monospace,monospace;
+  --col:1000px;
+  --text:680px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ground);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.85;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---------- header ---------- */
+.site-head{display:flex;flex-direction:column;align-items:center;gap:6px;padding-block:44px 34px;text-align:center}
+.name{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,52px);letter-spacing:-.06em;line-height:1.05;margin:0;text-decoration:none}
+.name-cn{font-family:var(--body);font-size:14px;letter-spacing:.18em;color:var(--ink-soft)}
+.nav{display:flex;gap:10px;align-items:baseline;font-family:var(--body);font-size:15px;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
+.nav a{text-decoration:none;padding-bottom:1px;border-bottom:1px solid transparent}
+.nav a[aria-current="page"],.nav a:hover{border-bottom-color:var(--ink)}
+.nav span{color:var(--ink-soft)}
+
+main{max-width:var(--col);margin:0 auto}
+.view[hidden]{display:none!important}
+
+/* ---------- home ---------- */
+.intro{max-width:var(--text);margin:0 auto 40px;text-align:center;font-size:15px;color:var(--ink-soft);text-wrap:balance}
+.projects{display:grid;gap:52px;padding-bottom:20px}
+.card{display:grid;gap:12px;text-decoration:none}
+.card .frame{transition:transform .5s ease,box-shadow .5s ease}
+.card:hover .frame{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(20,27,29,.55)}
+.card-cap{display:grid;justify-items:center;gap:2px;text-align:center}
+.card-title{font-family:var(--tech);font-size:clamp(19px,2.4vw,22px);letter-spacing:.08em;font-weight:400;margin:0}
+.card-meta{font-family:var(--tech);font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+
+/* ---------- media frames + designed fallback covers ---------- */
+.frame{position:relative;width:100%;max-width:100%;overflow:hidden;background:var(--ground-deep)}
+.r21{aspect-ratio:2/1}.r169{aspect-ratio:16/9}.r1610{aspect-ratio:16/10}.r34{aspect-ratio:3/4}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s ease}
+.frame img.on{opacity:1}
+.frame.contain img{object-fit:contain}
+.cover{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
+.frame.has-img .cover{display:none}
+.cover svg{position:absolute;inset:0;width:100%;height:100%}
+.cover .word{position:relative;font-family:var(--tech);letter-spacing:.14em;font-size:clamp(20px,4.4vw,44px);text-align:center;line-height:1.15;padding:0 16px}
+.cover .word small{display:block;font-size:.34em;letter-spacing:.3em;margin-top:.8em;opacity:.75}
+
+.cv-spell{background:radial-gradient(120% 90% at 50% 45%,#3a2c6e 0%,#1b1536 62%,#100c22 100%);color:#efe7ff}
+.cv-alice{background:#7d2130;color:#f7e9c6}
+.cv-lake{background:linear-gradient(180deg,#6d2f2c 0%,#8a3f35 38%,#24453f 62%,#14302d 100%);color:#f3e6d6}
+.cv-mask{background:radial-gradient(80% 80% at 50% 50%,#173a33 0%,#0b1614 70%);color:#a9f5df}
+.cv-plain{background:var(--ground-deep);color:var(--ink-soft)}
+
+/* ---------- project page ---------- */
+.p-head{display:grid;justify-items:center;gap:14px;text-align:center;padding-bottom:28px}
+.p-title{font-family:var(--display);font-weight:400;font-size:clamp(34px,5.4vw,56px);letter-spacing:-.03em;line-height:1.08;margin:0;text-wrap:balance}
+.p-kicker{font-family:var(--tech);font-size:14px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:8px 0 34px}
+.meta div{padding:12px 14px;min-width:0;border-left:1px solid var(--rule)}
+.meta div:first-child{border-left:0}
+.meta dt{font-family:var(--tech);font-size:12px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase}
+.meta dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.prose{max-width:var(--text);margin:44px auto;display:grid;gap:16px}
+.prose h2{font-family:var(--body);font-weight:400;font-size:22px;margin:18px 0 0;letter-spacing:.02em}
+.prose p{margin:0}
+.prose ul{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.prose li::marker{color:var(--ink-soft)}
+.prose code{font-family:var(--tech);font-size:.95em;background:var(--paper);padding:1px 6px}
+.links{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--tech);letter-spacing:.06em;font-size:15px}
+.links a{text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:1px}
+.links a:hover{color:var(--ink-soft);border-color:var(--ink-soft)}
+.cap{font-family:var(--tech);font-size:13px;letter-spacing:.05em;color:var(--ink-soft);text-align:center;margin-top:8px}
+figure{margin:0}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:34px 0}
+.stack{display:grid;gap:14px;margin:34px 0}
+
+/* data-pipeline strip (SpellChemists) */
+.pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:6px 0}
+.pipe .step{flex:1 1 120px;min-width:0;background:var(--paper);padding:10px 12px;display:grid;gap:2px}
+.pipe .step b{font-family:var(--tech);font-weight:400;font-size:14.5px;letter-spacing:.02em;overflow-wrap:anywhere;line-height:1.4}
+.pipe .step span{font-size:12.5px;line-height:1.55;color:var(--ink-soft)}
+.pipe .arrow{align-self:center;font-family:var(--tech);color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--tech);font-size:13.5px;letter-spacing:.05em;border:1px solid var(--ink);padding:3px 11px}
+.figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.figures div{background:var(--ground);padding:14px 16px;display:grid;gap:2px}
+.figures b{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.figures span{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.concepts{display:grid;gap:0;border-top:1px solid var(--rule)}
+.concepts div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.concepts b{font-family:var(--tech);font-weight:400;letter-spacing:.05em}
+
+.pager{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding-block:22px;margin-top:56px;font-family:var(--tech);letter-spacing:.06em}
+.pager a{text-decoration:none;display:grid;gap:2px;min-width:0}
+.pager a small{font-size:12px;color:var(--ink-soft);letter-spacing:.14em}
+.pager a:last-child{text-align:right}
+.pager a:hover span{border-bottom:1px solid var(--ink)}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px;align-items:start;padding-bottom:20px}
+.about .prose{margin:0}
+.about h2:first-child{margin-top:0}
+.timeline{display:grid;border-top:1px solid var(--rule)}
+.timeline div{display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.6}
+.timeline time{font-family:var(--tech);color:var(--ink-soft);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.skills{display:grid;border-top:1px solid var(--rule)}
+.skills div{display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.65}
+.skills b{font-weight:400;color:var(--ink-soft)}
+
+/* ---------- footer / contact ---------- */
+.contact{max-width:var(--col);margin:70px auto 0;display:grid;justify-items:center;gap:8px;text-align:center;padding-block:34px 18px;border-top:1px solid var(--rule)}
+.contact .who{font-family:var(--display);font-size:24px;letter-spacing:-.03em}
+.contact .role{font-family:var(--tech);font-size:13px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase}
+.contact-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:6px}
+.contact-item{display:flex;align-items:center;gap:8px;font-family:var(--tech);font-size:15px;letter-spacing:.03em}
+.contact-item .val{user-select:all}
+.copy{font:inherit;font-size:12px;letter-spacing:.1em;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:1px 8px;cursor:pointer}
+.copy:hover{background:var(--ink);color:var(--ground)}
+.fine{font-size:12px;color:var(--ink-soft);padding-bottom:26px;text-align:center;font-family:var(--tech);letter-spacing:.06em}
+
+@media (max-width:720px){
+  .meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .meta div:nth-child(3){border-left:0}
+  .meta div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .gallery{grid-template-columns:minmax(0,1fr)}
+  .about{grid-template-columns:minmax(0,1fr);gap:28px}
+  .figures{grid-template-columns:minmax(0,1fr)}
+  .concepts div{grid-template-columns:minmax(0,1fr);gap:2px}
+  .projects{gap:40px}
+  .site-head{padding-block:32px 26px}
+}
+
+/* ---------- language ---------- */
+:root[data-lang="en"] .zh,:root:not([data-lang="en"]) .en{display:none!important}
+.prose h2 .sub{font-family:var(--tech);font-size:13px;letter-spacing:.16em;color:var(--ink-soft);margin-left:10px;text-transform:uppercase}
+.lang{display:inline-flex;gap:0;margin-left:14px;border:1px solid var(--ink)}
+.lang button{font:inherit;font-family:var(--tech);font-size:13px;letter-spacing:.08em;text-transform:none;background:transparent;color:var(--ink);border:0;padding:1px 9px;cursor:pointer;line-height:1.6}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+:root[data-lang="en"] body{line-height:1.75}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <a class="name" href="#home">Chufan Chen</a>
+  <div class="name-cn"><span class="zh">陈楚凡 · 技术策划 / 游戏程序</span><span class="en">Technical Designer / Gameplay Programmer</span></div>
+  <nav class="nav" aria-label="Main">
+    <a href="#home" data-nav="home">Projects</a><span>/</span><a href="#about" data-nav="about">About</a>
+    <span class="lang" role="group" aria-label="Language / 语言"><button type="button" id="lang-zh" data-lang="zh" aria-pressed="true">中</button><button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button></span>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===================== HOME ===================== -->
+<section class="view" id="v-home" data-view="home">
+  <p class="intro zh">CMU 娱乐技术中心（ETC）硕士在读。关注技能与战斗系统设计、数据驱动的配置管线和给策划用的 Unity 工具。</p>
+  <p class="intro en">Master's student at Carnegie Mellon's Entertainment Technology Center. I work on skill and combat systems, data-driven content pipelines, and Unity tools that let designers iterate without waiting on code.</p>
+  <div class="projects">
+    <a class="card" href="#spellchemists">
+      <div class="frame r21" data-img="img/spellchemists-cover.jpg"><div class="cover cv-spell">
+        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#b9a7ff" stroke-opacity=".38" stroke-width="1.5"><circle cx="500" cy="250" r="190"/><circle cx="500" cy="250" r="168"/><circle cx="500" cy="250" r="96"/><polygon points="500,82 645.5,334 354.5,334"/><polygon points="500,418 354.5,166 645.5,166"/></g><g><circle cx="634" cy="116" r="9" fill="#e8643c"/><circle cx="634" cy="384" r="9" fill="#4aa3df"/><circle cx="366" cy="384" r="9" fill="#8fb35a"/><circle cx="366" cy="116" r="9" fill="#e7d36a"/></g></svg>
+        <div class="word">SpellChemists<small><span class="zh">BOARD · 双人桌面对战</span><span class="en">BOARD · 2-PLAYER TABLETOP DUEL</span></small></div></div></div>
+      <div class="card-cap"><h3 class="card-title">SpellChemists</h3><span class="card-meta"><span class="zh">技术策划 / 程序 · Unity + Board SDK · 2026</span><span class="en">Technical Designer / Programmer · Unity + Board SDK · 2026</span></span></div>
+    </a>
+
+    <a class="card" href="#alices">
+      <div class="frame r21" data-img="img/alices-cover.jpg"><div class="cover cv-alice">
+        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g font-family="Georgia,serif" font-size="150" fill="#f7e9c6" fill-opacity=".14"><text x="70" y="190">♠</text><text x="800" y="200">♥</text><text x="140" y="460">♣</text><text x="760" y="470">♦</text></g></svg>
+        <div class="word">It Takes 2 Alices<small><span class="zh">TILT FIVE · 桌面 AR</span><span class="en">TILT FIVE · TABLETOP AR</span></small></div></div></div>
+      <div class="card-cap"><h3 class="card-title">It Takes 2 Alices</h3><span class="card-meta"><span class="zh">程序 · Tilt Five 桌面 AR · 2026</span><span class="en">Programmer · Tilt Five tabletop AR · 2026</span></span></div>
+    </a>
+
+    <a class="card" href="#lake">
+      <div class="frame r21" data-img="img/lake-cover.jpg|https://carbon-media.accelerator.net/0000000mNvS/0UV3NGDclXucWFJylJL1s8;1600x900.jpeg"><div class="cover cv-lake">
+        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#f3e6d6" stroke-opacity=".25" stroke-width="2"><path d="M0 330 Q125 300 250 330 T500 330 T750 330 T1000 330"/><path d="M0 370 Q125 340 250 370 T500 370 T750 370 T1000 370"/><path d="M0 410 Q125 380 250 410 T500 410 T750 410 T1000 410"/></g><line x1="700" y1="0" x2="700" y2="230" stroke="#f3e6d6" stroke-opacity=".45" stroke-width="1.5"/><path d="M700 230 q0 22 -16 22" fill="none" stroke="#f3e6d6" stroke-opacity=".6" stroke-width="2"/></svg>
+        <div class="word">Lake Minnewaska<small><span class="zh">STEAM · 已发售</span><span class="en">OUT NOW ON STEAM</span></small></div></div></div>
+      <div class="card-cap"><h3 class="card-title">The Lake Minnewaska</h3><span class="card-meta"><span class="zh">玩法程序 / 设计 · Unity · Steam 已发售 · 2023–24</span><span class="en">Gameplay Programmer / Designer · Unity · Released on Steam · 2023–24</span></span></div>
+    </a>
+
+    <a class="card" href="#lonemask">
+      <div class="frame r21" data-img="img/lonemask-cover.jpg"><div class="cover cv-mask">
+        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#5fe3bf" stroke-opacity=".28"><circle cx="500" cy="250" r="60"/><circle cx="500" cy="250" r="110"/><circle cx="500" cy="250" r="170"/><circle cx="500" cy="250" r="240"/></g></svg>
+        <div class="word">A Lone Mask: Trial<small>GLOBAL GAME JAM</small></div></div></div>
+      <div class="card-cap"><h3 class="card-title">A Lone Mask: Trial</h3><span class="card-meta"><span class="zh">游戏设计 / QA · Global Game Jam · 2026</span><span class="en">Game Designer / QA · Global Game Jam · 2026</span></span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== SPELLCHEMISTS ===================== -->
+<article class="view" data-view="spellchemists" hidden>
+  <header class="p-head"><span class="p-kicker"><span class="zh">CMU ETC 学期项目</span><span class="en">CMU ETC Semester Project</span></span><h1 class="p-title">SpellChemists</h1></header>
+  <dl class="meta">
+    <div><dt><span class="zh">身份</span><span class="en">Role</span></dt><dd><span class="zh">技术策划 / 程序</span><span class="en">Technical Designer / Programmer</span></dd></div>
+    <div><dt><span class="zh">时间</span><span class="en">Timeline</span></dt><dd><span class="zh">2026.08 – 至今</span><span class="en">Aug 2026 – present</span></dd></div>
+    <div><dt><span class="zh">引擎</span><span class="en">Engine</span></dt><dd>Unity · Board SDK</dd></div>
+    <div><dt><span class="zh">类型</span><span class="en">Genre</span></dt><dd><span class="zh">双人桌面对战</span><span class="en">2-player tabletop duel</span></dd></div>
+  </dl>
+  <div class="frame r21" data-img="img/spellchemists-cover.jpg"><div class="cover cv-spell">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#b9a7ff" stroke-opacity=".38" stroke-width="1.5"><circle cx="500" cy="250" r="190"/><circle cx="500" cy="250" r="168"/><circle cx="500" cy="250" r="96"/><polygon points="500,82 645.5,334 354.5,334"/><polygon points="500,418 354.5,166 645.5,166"/></g><g><circle cx="634" cy="116" r="9" fill="#e8643c"/><circle cx="634" cy="384" r="9" fill="#4aa3df"/><circle cx="366" cy="384" r="9" fill="#8fb35a"/><circle cx="366" cy="116" r="9" fill="#e7d36a"/></g></svg>
+    <div class="word">SpellChemists<small><span class="zh">BOARD · 双人桌面对战</span><span class="en">BOARD · 2-PLAYER TABLETOP DUEL</span></small></div></div></div>
+
+  <div class="prose">
+    <p class="zh">在 Board 触摸桌上进行的双人对战游戏。我在团队里负责技术策划：把技能和数值做成策划能直接改表、改数据的形式，并写好配套的编辑器工具，让设计迭代不需要等程序。</p>
+    <p class="en">A two-player duel played on the Board touch table. I'm the team's technical designer: I made skills and balance numbers editable straight from spreadsheets and data, and built the editor tools around them, so design iteration never waits on a programmer.</p>
+    <div class="figures">
+      <div><b>25</b><span class="zh">个技能，全部由表格数据驱动</span><span class="en">skills, all driven by spreadsheet data</span></div>
+      <div><b>2</b><span class="zh">个职业</span><span class="en">playable classes</span></div>
+      <div><b>0</b><span class="zh">处按技能 ID 写死的逻辑</span><span class="en">skill IDs hard-coded in gameplay logic</span></div>
+    </div>
+
+    <h2><span class="zh">数值管线</span><span class="en">Data Pipeline</span><span class="sub zh">Data pipeline</span></h2>
+    <p class="zh">技能和职业的全部数值都从表格进入游戏。我写了导入工具，打通了下面这条线：</p>
+    <p class="en">Every skill and class value enters the game from a spreadsheet. I wrote the importer that connects each step:</p>
+    <div class="pipe" role="list">
+      <div class="step" role="listitem"><b>Excel / Google Sheet</b><span class="zh">策划维护数值，支持多版本数值表</span><span class="en">Designers own the numbers; multiple balance versions supported</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step" role="listitem"><b>CSV</b><span class="zh">导出中间格式</span><span class="en">Exported interchange format</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step" role="listitem"><b><span class="zh">导入工具</span><span class="en">Importer</span></b><span class="zh">表头别名匹配、表格一致性校验</span><span class="en">Header alias matching and consistency checks</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step" role="listitem"><b>ScriptableObject</b><span class="zh">按 ID 原地更新，资产 GUID 与引用保持稳定</span><span class="en">Updated in place by ID, so asset GUIDs and references stay stable</span></div>
+    </div>
+    <p class="zh">按 ID 原地更新是这条管线的关键：重新导入数值不会产生新资产，场景和预制体里对技能的引用不会断。</p>
+    <p class="en">In-place updates are the key part. Re-importing never creates new assets, so references to skills in scenes and prefabs never break.</p>
+
+    <h2><span class="zh">可组合的技能效果系统</span><span class="en">Composable Effect System</span><span class="sub zh">Effect system</span></h2>
+    <p class="zh">基于 <code>[SerializeReference]</code> 设计。一个技能由若干效果组合而成，每个效果定义触发时机、作用目标和结算顺序。新技能只需配置数据，不改代码。</p>
+    <p class="en">Built on <code>[SerializeReference]</code>. A skill is a list of effects, and each effect defines its trigger timing, its targets and its resolution order. New skills are pure data, with no new code.</p>
+    <div class="chips zh" aria-label="效果类型"><span>伤害</span><span>护盾</span><span>元素附着</span><span>位移</span><span>持续区域</span></div>
+    <div class="chips en" aria-label="Effect types"><span>Damage</span><span>Shield</span><span>Elemental status</span><span>Displacement</span><span>Persistent zone</span></div>
+
+    <h2><span class="zh">策划工具</span><span class="en">Designer Tools</span><span class="sub zh">Tools</span></h2>
+    <ul class="zh">
+      <li>自定义 Inspector 和批量效果生成工具，减少重复配置。</li>
+      <li>真机运行时关卡编辑器：策划可以直接在触摸桌上摆放、缩放、旋转道具区域。</li>
+      <li>布局存为 JSON，导出进构建，每局随机选用一个开局。</li>
+    </ul>
+    <ul class="en">
+      <li>Custom Inspectors and a batch effect generator that cut repetitive setup.</li>
+      <li>An on-device runtime level editor: designers place, scale and rotate prop zones directly on the touch table.</li>
+      <li>Layouts save as JSON, ship in the build, and one is picked at random at the start of each match.</li>
+    </ul>
+  </div>
+  <nav class="pager" aria-label="Projects"><a href="#lonemask"><small><span class="zh">上一个</span><span class="en">PREVIOUS</span></small><span>A Lone Mask: Trial</span></a><a href="#alices"><small><span class="zh">下一个</span><span class="en">NEXT</span></small><span>It Takes 2 Alices</span></a></nav>
+</article>
+
+<!-- ===================== IT TAKES 2 ALICES ===================== -->
+<article class="view" data-view="alices" hidden>
+  <header class="p-head"><span class="p-kicker"><span class="zh">CMU ETC 学期项目</span><span class="en">CMU ETC Semester Project</span></span><h1 class="p-title">It Takes 2 Alices</h1></header>
+  <dl class="meta">
+    <div><dt><span class="zh">身份</span><span class="en">Role</span></dt><dd><span class="zh">程序</span><span class="en">Programmer</span></dd></div>
+    <div><dt><span class="zh">时间</span><span class="en">Timeline</span></dt><dd><span class="zh">2026.01 – 2026.05</span><span class="en">Jan – May 2026</span></dd></div>
+    <div><dt><span class="zh">平台</span><span class="en">Platform</span></dt><dd><span class="zh">Tilt Five 桌面 AR</span><span class="en">Tilt Five tabletop AR</span></dd></div>
+    <div><dt><span class="zh">类型</span><span class="en">Genre</span></dt><dd><span class="zh">双人合作编程解谜</span><span class="en">Co-op programming puzzle</span></dd></div>
+  </dl>
+  <div class="frame r21" data-img="img/alices-cover.jpg"><div class="cover cv-alice">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g font-family="Georgia,serif" font-size="150" fill="#f7e9c6" fill-opacity=".14"><text x="70" y="190">♠</text><text x="800" y="200">♥</text><text x="140" y="460">♣</text><text x="760" y="470">♦</text></g></svg>
+    <div class="word">It Takes 2 Alices<small><span class="zh">TILT FIVE · 桌面 AR</span><span class="en">TILT FIVE · TABLETOP AR</span></small></div></div></div>
+
+  <div class="prose">
+    <p class="zh">面向儿童的编程启蒙游戏。灵感来自 Alice 3 编程环境，两名玩家围着 Tilt Five 桌面 AR 一起解谜，在合作中接触基础编程概念。</p>
+    <p class="en">A game that introduces young children to programming. Inspired by the Alice 3 programming environment, it has two players solving puzzles together around a Tilt Five tabletop AR board, picking up basic programming ideas as they cooperate.</p>
+    <h2><span class="zh">我的工作</span><span class="en">My Role</span><span class="sub zh">Role</span></h2>
+    <p class="zh">负责谜题机制和双人交互的程序实现，把抽象的编程概念转化为孩子能动手操作的关卡机制。关卡里用到的概念包括：</p>
+    <p class="en">I programmed the puzzle mechanics and the two-player interactions, turning abstract programming concepts into level mechanics kids can play with by hand. The levels cover:</p>
+    <div class="chips zh" aria-label="编程概念"><span>while 循环</span><span>数据类型</span><span>逻辑门</span></div>
+    <div class="chips en" aria-label="Concepts"><span>while loops</span><span>Data types</span><span>Logic gates</span></div>
+    <div class="links"><a href="https://projects.etc.cmu.edu/it-takes-two-alices/" target="_blank" rel="noopener"><span class="zh">项目官网</span><span class="en">Project website</span> ↗</a></div>
+  </div>
+  <nav class="pager" aria-label="Projects"><a href="#spellchemists"><small><span class="zh">上一个</span><span class="en">PREVIOUS</span></small><span>SpellChemists</span></a><a href="#lake"><small><span class="zh">下一个</span><span class="en">NEXT</span></small><span>The Lake Minnewaska</span></a></nav>
+</article>
+
+<!-- ===================== LAKE MINNEWASKA ===================== -->
+<article class="view" data-view="lake" hidden>
+  <header class="p-head"><span class="p-kicker"><span class="zh">USC 进阶游戏开发项目 · Steam 已发售</span><span class="en">USC Advanced Game Project · Released on Steam</span></span><h1 class="p-title">The Lake Minnewaska</h1></header>
+  <dl class="meta">
+    <div><dt><span class="zh">身份</span><span class="en">Role</span></dt><dd><span class="zh">玩法程序 / 设计</span><span class="en">Gameplay Programmer / Designer</span></dd></div>
+    <div><dt><span class="zh">时间</span><span class="en">Timeline</span></dt><dd><span class="zh">2023.07 – 2024.05</span><span class="en">Jul 2023 – May 2024</span></dd></div>
+    <div><dt><span class="zh">引擎</span><span class="en">Engine</span></dt><dd>Unity</dd></div>
+    <div><dt><span class="zh">类型</span><span class="en">Genre</span></dt><dd><span class="zh">第一人称叙事冒险</span><span class="en">First-person narrative adventure</span></dd></div>
+  </dl>
+  <div class="frame r21" data-img="img/lake-cover.jpg|https://carbon-media.accelerator.net/0000000mNvS/0UV3NGDclXucWFJylJL1s8;1600x900.jpeg"><div class="cover cv-lake">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#f3e6d6" stroke-opacity=".25" stroke-width="2"><path d="M0 330 Q125 300 250 330 T500 330 T750 330 T1000 330"/><path d="M0 370 Q125 340 250 370 T500 370 T750 370 T1000 370"/><path d="M0 410 Q125 380 250 410 T500 410 T750 410 T1000 410"/></g><line x1="700" y1="0" x2="700" y2="230" stroke="#f3e6d6" stroke-opacity=".45" stroke-width="1.5"/><path d="M700 230 q0 22 -16 22" fill="none" stroke="#f3e6d6" stroke-opacity=".6" stroke-width="2"/></svg>
+    <div class="word">Lake Minnewaska<small><span class="zh">STEAM · 已发售</span><span class="en">OUT NOW ON STEAM</span></small></div></div></div>
+
+  <div class="prose">
+    <p class="zh">第一人称叙事冒险游戏。玩家扮演渔夫 Sosa，想要重新走近自己的女儿。玩法围绕抛竿钓鱼、收集鱼类图鉴和探索一座神秘的湖展开。</p>
+    <p class="en">A first-person narrative adventure. You play Sosa, a fisherman trying to reconnect with his daughter, casting lines, collecting fish species and exploring a mysterious lake.</p>
+    <h2><span class="zh">钓鱼核心循环</span><span class="en">The Fishing Loop</span><span class="sub zh">Core loop</span></h2>
+    <div class="pipe" role="list">
+      <div class="step" role="listitem"><b><span class="zh">抛竿</span><span class="en">Cast</span></b><span class="zh">抛竿前显示鱼钩预测轨迹</span><span class="en">A predicted hook trajectory shows before the cast</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step" role="listitem"><b><span class="zh">上钩</span><span class="en">Hook</span></b><span class="zh">不同鱼种有各自的判定区域</span><span class="en">Each fish species has its own hitboxes</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step" role="listitem"><b><span class="zh">收线</span><span class="en">Reel</span></b><span class="zh">与鱼角力：耐力系统 + QTE，分阶段收线</span><span class="en">Fight the fish: stamina system plus QTEs, reeled in stages</span></div>
+    </div>
+    <h2><span class="zh">我的工作</span><span class="en">My Role</span><span class="sub zh">Gameplay engineer</span></h2>
+    <ul class="zh">
+      <li>设计并实现抛竿、上钩、收线三段式钓鱼循环，以及鱼竿转动和与鱼角力的手感。</li>
+      <li>实现鱼的耐力与挣扎系统和 QTE 系统，为不同鱼种定义收线阶段和判定区域。</li>
+      <li>通过多轮试玩测试和对照实验，调校耐力消耗、QTE 判定等手感参数，在挑战性和爽快感之间找平衡。</li>
+      <li>实现钓点激活、钓鱼日志查看等场景交互。</li>
+    </ul>
+    <ul class="en">
+      <li>Designed and built the three-stage cast, hook and reel loop, including rod rotation and the feel of fighting a fish.</li>
+      <li>Built the fish stamina and struggle system and the QTE system, with reeling stages and hitboxes defined per species.</li>
+      <li>Tuned stamina drain, QTE timing windows and other feel parameters through rounds of playtests and A/B comparisons, balancing challenge against satisfaction.</li>
+      <li>Implemented world interactions such as activating fishing spots and browsing the fishing journal.</li>
+    </ul>
+    <div class="links"><a href="https://store.steampowered.com/app/2858430/Lake_Minnewaska/" target="_blank" rel="noopener"><span class="zh">Steam 商店页</span><span class="en">Steam page</span> ↗</a><a href="https://www.lmthegame.com/" target="_blank" rel="noopener"><span class="zh">游戏官网与开发日志</span><span class="en">Game website &amp; dev blog</span> ↗</a></div>
+  </div>
+  <div class="gallery">
+    <figure><div class="frame r1610" data-img="img/lake-1.jpg"><div class="cover cv-lake"><div class="word">Cast</div></div></div><figcaption class="cap"><span class="zh">抛竿：显示预测的抛物线和落点位置</span><span class="en">Casting, with the predicted arc and landing point shown</span></figcaption></figure>
+    <figure><div class="frame r1610" data-img="img/lake-2.jpg"><div class="cover cv-lake"><div class="word">Reel</div></div></div><figcaption class="cap"><span class="zh">收线：右侧为鱼的耐力条</span><span class="en">Reeling, with the fish's stamina bar on the right</span></figcaption></figure>
+    <figure><div class="frame r1610" data-img="img/lake-3.jpg"><div class="cover cv-lake"><div class="word">Cabin</div></div></div><figcaption class="cap"><span class="zh">船舱：湖区地图与钓鱼日志</span><span class="en">The cabin: lake map and fishing journal</span></figcaption></figure>
+    <figure><div class="frame r1610" data-img="img/lake-4.jpg"><div class="cover cv-lake"><div class="word">Journal</div></div></div><figcaption class="cap"><span class="zh">钓鱼日志中的鱼类图鉴</span><span class="en">A fish entry in the fishing journal</span></figcaption></figure>
+  </div>
+  <nav class="pager" aria-label="Projects"><a href="#alices"><small><span class="zh">上一个</span><span class="en">PREVIOUS</span></small><span>It Takes 2 Alices</span></a><a href="#lonemask"><small><span class="zh">下一个</span><span class="en">NEXT</span></small><span>A Lone Mask: Trial</span></a></nav>
+</article>
+
+<!-- ===================== A LONE MASK ===================== -->
+<article class="view" data-view="lonemask" hidden>
+  <header class="p-head"><span class="p-kicker">Global Game Jam</span><h1 class="p-title">A Lone Mask: Trial</h1></header>
+  <dl class="meta">
+    <div><dt><span class="zh">身份</span><span class="en">Role</span></dt><dd><span class="zh">游戏设计 / QA</span><span class="en">Game Designer / QA</span></dd></div>
+    <div><dt><span class="zh">时间</span><span class="en">Timeline</span></dt><dd><span class="zh">2026.01</span><span class="en">Jan 2026</span></dd></div>
+    <div><dt><span class="zh">类型</span><span class="en">Genre</span></dt><dd><span class="zh">叙事驱动 · 分支对话</span><span class="en">Narrative · branching dialogue</span></dd></div>
+    <div><dt><span class="zh">结局</span><span class="en">Endings</span></dt><dd><span class="zh">10 种</span><span class="en">10</span></dd></div>
+  </dl>
+  <div class="frame r21" data-img="img/lonemask-cover.jpg"><div class="cover cv-mask">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#5fe3bf" stroke-opacity=".28"><circle cx="500" cy="250" r="60"/><circle cx="500" cy="250" r="110"/><circle cx="500" cy="250" r="170"/><circle cx="500" cy="250" r="240"/></g></svg>
+    <div class="word">A Lone Mask: Trial<small>GLOBAL GAME JAM</small></div></div></div>
+  <div class="prose">
+    <p class="zh">叙事驱动的游戏。玩家与一位赛博萨满对话，围绕“存在的意义”展开讨论。不同的选择会得到不同的 NPC 回应，并把故事引向 10 种结局之一。</p>
+    <p class="en">A narrative-driven game. You talk with a cyber shaman about the meaning of existence. Each choice changes how the NPC responds and steers the story toward one of 10 endings.</p>
+    <h2><span class="zh">我的工作</span><span class="en">My Role</span><span class="sub zh">Design &amp; QA</span></h2>
+    <ul class="zh">
+      <li>设计对话分支和 NPC 反应，让回应符合角色性格和叙事定位，故事真相逐步揭开，不一次说破。</li>
+      <li>开发过程中遍历测试全部分支，确认每个选项触发正确回应，所有结局都能正确抵达。</li>
+    </ul>
+    <ul class="en">
+      <li>Designed the dialogue branches and NPC reactions so every response fits the character's personality and narrative role, with the truth revealed step by step.</li>
+      <li>Tested every branch throughout development to confirm each option triggers the right response and every ending can be reached.</li>
+    </ul>
+    <div class="links"><a href="https://andypang1010.itch.io/a-lone-mask-trial" target="_blank" rel="noopener"><span class="zh">在 itch.io 游玩</span><span class="en">Play on itch.io</span> ↗</a></div>
+  </div>
+  <figure class="stack"><div class="frame r169 contain" data-img="img/lonemask-endings.jpg"><div class="cover cv-mask"><div class="word">10 Possible Endings</div></div></div><figcaption class="cap"><span class="zh">10 种结局</span><span class="en">10 possible endings</span></figcaption></figure>
+  <nav class="pager" aria-label="Projects"><a href="#lake"><small><span class="zh">上一个</span><span class="en">PREVIOUS</span></small><span>The Lake Minnewaska</span></a><a href="#spellchemists"><small><span class="zh">下一个</span><span class="en">NEXT</span></small><span>SpellChemists</span></a></nav>
+</article>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="view" data-view="about" hidden>
+  <div class="about">
+    <div class="frame r34" data-img="img/portrait.jpg|https://carbon-media.accelerator.net/0000000mNvS/8ih2gMJ1dX2dwprWocZDtN;1200x800.jpeg"><div class="cover cv-plain"><div class="word">Chufan Chen</div></div></div>
+    <div class="prose">
+      <h2><span class="zh">关于我</span><span class="en">About Me</span><span class="sub zh">About</span></h2>
+      <p class="zh">我是陈楚凡（Chufan Chen），卡内基梅隆大学娱乐技术中心（ETC）硕士在读，本科毕业于南加州大学计算机科学与游戏设计专业。我在找技术策划方向的工作：既能设计技能和战斗系统，也能把它们落成数据结构和策划工具。</p>
+      <p class="en">I'm Chufan Chen, a master's student at Carnegie Mellon's Entertainment Technology Center, with a B.S. in Computer Science (Games) from USC. I'm looking for technical design roles where I can design skill and combat systems and also build the data structures and designer tools that make them work.</p>
+
+      <h2><span class="zh">经历</span><span class="en">Timeline</span><span class="sub zh">Timeline</span></h2>
+      <div class="timeline">
+        <div><time>2025.08 – 2027.05</time><span class="zh">卡内基梅隆大学（CMU）娱乐技术硕士</span><span class="en">Carnegie Mellon University, Master of Entertainment Technology</span></div>
+        <div><time>2023.06 – 2023.08</time><span class="zh">三七互娱《斗罗大陆：魂师对决》客户端开发实习生：用 Unity 整合版本资源，实现限时活动与系统界面交互；对接后台接口，修复客户端与服务器交互报错</span><span class="en">37 Interactive Entertainment, client engineer intern on the live mobile game <i>Douluo Dalu: Soul Master Duel</i>. Integrated new content in Unity, built UI logic for limited-time events and systems, and fixed client–server errors with the backend team.</span></div>
+        <div><time>2021.08 – 2024.12</time><span class="zh">南加州大学（USC）计算机科学与游戏设计本科</span><span class="en">University of Southern California, B.S. in Computer Science (Games)</span></div>
+      </div>
+
+      <h2><span class="zh">技能</span><span class="en">Skills</span><span class="sub zh">Skills</span></h2>
+      <div class="skills">
+        <div><b><span class="zh">设计</span><span class="en">Design</span></b><span class="zh">技能与战斗系统设计、效果结算规则、核心循环拆解、手感参数调优、试玩测试与迭代</span><span class="en">Skill and combat systems, effect resolution rules, core loop breakdown, game-feel tuning, playtesting and iteration</span></div>
+        <div><b><span class="zh">数据配置</span><span class="en">Data</span></b><span class="zh">Excel / Google Sheet、CSV、JSON；ScriptableObject 数据架构；Unity 编辑器工具（导入器、自定义 Inspector、批量工具）</span><span class="en">Excel / Google Sheets, CSV, JSON; ScriptableObject data architecture; Unity editor tools (importers, custom Inspectors, batch tools)</span></div>
+        <div><b><span class="zh">编程</span><span class="en">Code</span></b><span class="zh">C#（Unity，熟练）、C/C++、Python、Java；了解强化学习（Q-Learning、Gym）</span><span class="en">C# (Unity, proficient), C/C++, Python, Java; familiar with reinforcement learning (Q-learning, Gym)</span></div>
+        <div><b><span class="zh">平台</span><span class="en">Platforms</span></b><span>Unity 2D/3D; PC, Meta Quest 3, Tilt Five, Xbox Adaptive Controller</span></div>
+        <div><b><span class="zh">协作</span><span class="en">Team</span></b><span class="zh">Git、Perforce；中文母语，英语流利</span><span class="en">Git, Perforce; native Mandarin, fluent English</span></div>
+      </div>
+
+      <h2><span class="zh">荣誉</span><span class="en">Awards</span><span class="sub zh">Awards</span></h2>
+      <ul class="zh">
+        <li>USC Dean's List（2022 春季）</li>
+        <li>American Computer Science League 个人高分荣誉（Individual High Distinction）</li>
+      </ul>
+      <ul class="en">
+        <li>USC Dean's List, Spring 2022</li>
+        <li>American Computer Science League, Individual High Distinction</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="contact">
+  <div class="who">Chufan Chen</div>
+  <div class="role">Technical Designer · Gameplay Programmer</div>
+  <div class="contact-row">
+    <div class="contact-item"><span class="val" id="c-mail">robertchen0122@gmail.com</span><button class="copy" type="button" id="b-mail" data-copy="c-mail"></button></div>
+    <div class="contact-item"><span class="val" id="c-tel">+86 181-8910-8156</span><button class="copy" type="button" id="b-tel" data-copy="c-tel"></button></div>
+  </div>
+</footer>
+<p class="fine">© Chufan Chen</p>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var T = {
+    zh:{copy:'复制',copied:'已复制',selected:'已选中',title:'Chufan Chen 作品集',lang:'zh-CN'},
+    en:{copy:'Copy',copied:'Copied',selected:'Selected',title:'Chufan Chen Portfolio',lang:'en'}
+  };
+
+  // Language: saved choice, else browser language.
+  function savedLang(){ try{ return localStorage.getItem('cc-lang'); }catch(e){ return null; } }
+  var lang = savedLang();
+  if(lang !== 'zh' && lang !== 'en'){ lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en'; }
+  function setLang(l, save){
+    lang = l;
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', T[l].lang);
+    document.title = T[l].title;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-lang') === l ? 'true' : 'false'); });
+    document.querySelectorAll('.copy').forEach(function(b){ b.textContent = T[l].copy; });
+    if(save){ try{ localStorage.setItem('cc-lang', l); }catch(e){} }
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang'), true); });
+  });
+  setLang(lang, false);
+
+  // Images: try each source in turn; if none loads, the designed cover stays.
+  document.querySelectorAll('.frame[data-img]').forEach(function(frame){
+    var srcs = frame.getAttribute('data-img').split('|');
+    var card = frame.closest('.card');
+    var alt = card && card.querySelector('.card-title') ? card.querySelector('.card-title').textContent : '';
+    function tryNext(i){
+      if(i >= srcs.length) return;
+      var img = new Image();
+      img.alt = alt; img.decoding = 'async';
+      img.onload = function(){ frame.classList.add('has-img'); frame.appendChild(img); requestAnimationFrame(function(){ img.classList.add('on'); }); };
+      img.onerror = function(){ tryNext(i+1); };
+      img.src = srcs[i];
+    }
+    tryNext(0);
+  });
+
+  // Hash router: #home, #about, or a project id.
+  var views = {};
+  document.querySelectorAll('[data-view]').forEach(function(v){ views[v.getAttribute('data-view')] = v; });
+  function route(){
+    var key = (location.hash || '#home').slice(1);
+    if(!views[key]) key = 'home';
+    Object.keys(views).forEach(function(k){ views[k].hidden = (k !== key); });
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      var n = a.getAttribute('data-nav');
+      var cur = (n === key) || (n === 'home' && key !== 'about');
+      if(cur) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      var text = el.textContent;
+      function reset(){ setTimeout(function(){ btn.textContent = T[lang].copy; }, 1600); }
+      function selectIt(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent=T[lang].selected; reset(); }
+      try{
+        navigator.clipboard.writeText(text).then(function(){ btn.textContent=T[lang].copied; reset(); }, selectIt);
+      }catch(e){ selectIt(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
