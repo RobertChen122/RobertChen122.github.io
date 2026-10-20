@@ -109,10 +109,6 @@ figure{margin:0}
 .pipe .arrow{align-self:center;font-family:var(--tech);color:var(--ink-soft)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips span{font-family:var(--tech);font-size:13.5px;letter-spacing:.05em;border:1px solid var(--ink);padding:3px 11px}
-.figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.figures div{background:var(--ground);padding:14px 16px;display:grid;gap:2px}
-.figures b{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
-.figures span{font-size:13px;color:var(--ink-soft);line-height:1.5}
 .concepts{display:grid;gap:0;border-top:1px solid var(--rule)}
 .concepts div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}
 .concepts b{font-family:var(--tech);font-weight:400;letter-spacing:.05em}
@@ -151,7 +147,6 @@ figure{margin:0}
   .meta div:nth-child(n+3){border-top:1px solid var(--rule)}
   .gallery{grid-template-columns:minmax(0,1fr)}
   .about{grid-template-columns:minmax(0,1fr);gap:28px}
-  .figures{grid-template-columns:minmax(0,1fr)}
   .concepts div{grid-template-columns:minmax(0,1fr);gap:2px}
   .projects{gap:40px}
   .site-head{padding-block:32px 26px}
@@ -228,17 +223,12 @@ figure{margin:0}
     <div class="word">SpellChemists<small><span class="zh">BOARD · 双人桌面对战</span><span class="en">BOARD · 2-PLAYER TABLETOP DUEL</span></small></div></div></div>
 
   <div class="prose">
-    <p class="zh">在 Board 触摸桌上进行的双人对战游戏。我在团队里负责技术策划：把技能和数值做成策划能直接改表、改数据的形式，并写好配套的编辑器工具，让设计迭代不需要等程序。</p>
-    <p class="en">A two-player duel played on the Board touch table. I'm the team's technical designer: I made skills and balance numbers editable straight from spreadsheets and data, and built the editor tools around them, so design iteration never waits on a programmer.</p>
-    <div class="figures">
-      <div><b>25</b><span class="zh">个技能，全部由表格数据驱动</span><span class="en">skills, all driven by spreadsheet data</span></div>
-      <div><b>2</b><span class="zh">个职业</span><span class="en">playable classes</span></div>
-      <div><b>0</b><span class="zh">处按技能 ID 写死的逻辑</span><span class="en">skill IDs hard-coded in gameplay logic</span></div>
-    </div>
+    <p class="zh">在 Board 触摸桌上进行的双人对战游戏，共有 2 个职业、25 个技能。团队共 5 人：制作人、美术、技能策划和两名程序。我同时担任技术策划和程序，搭建了数值管线和技能效果系统，并开发了配套的编辑器工具，让技能策划直接改表、改数据就能迭代技能，不用等程序改代码。</p>
+    <p class="en">A two-player duel played on the Board touch table, with 2 classes and 25 skills, made by a team of five: a producer, an artist, a skill designer and two programmers. I'm both the technical designer and one of the programmers. I built the data pipeline, the skill effect system and the editor tools around them, so our skill designer iterates by editing spreadsheets and data instead of waiting for code changes.</p>
 
     <h2><span class="zh">数值管线</span><span class="en">Data Pipeline</span><span class="sub zh">Data pipeline</span></h2>
-    <p class="zh">技能和职业的全部数值都从表格进入游戏。我写了导入工具，打通了下面这条线：</p>
-    <p class="en">Every skill and class value enters the game from a spreadsheet. I wrote the importer that connects each step:</p>
+    <p class="zh">我搭建了从表格到游戏内资产的数值管线，并编写了导入工具。全部技能和职业数值都经过这条线进入游戏：</p>
+    <p class="en">I built the pipeline that takes balance data from spreadsheets into game assets, and wrote the importer for it. Every skill and class value enters the game this way:</p>
     <div class="pipe" role="list">
       <div class="step" role="listitem"><b>Excel / Google Sheet</b><span class="zh">策划维护数值，支持多版本数值表</span><span class="en">Designers own the numbers; multiple balance versions supported</span></div>
       <div class="arrow" aria-hidden="true">→</div>
@@ -248,25 +238,25 @@ figure{margin:0}
       <div class="arrow" aria-hidden="true">→</div>
       <div class="step" role="listitem"><b>ScriptableObject</b><span class="zh">按 ID 原地更新，资产 GUID 与引用保持稳定</span><span class="en">Updated in place by ID, so asset GUIDs and references stay stable</span></div>
     </div>
-    <p class="zh">按 ID 原地更新是这条管线的关键：重新导入数值不会产生新资产，场景和预制体里对技能的引用不会断。</p>
-    <p class="en">In-place updates are the key part. Re-importing never creates new assets, so references to skills in scenes and prefabs never break.</p>
+    <p class="zh">我让导入工具按 ID 原地更新资产：重新导入数值不会生成新资产，GUID 保持不变，场景和预制体里对技能的引用也不会断。</p>
+    <p class="en">I made the importer update assets in place by ID. Re-importing never creates new assets, GUIDs stay the same, and references to skills in scenes and prefabs never break.</p>
 
     <h2><span class="zh">可组合的技能效果系统</span><span class="en">Composable Effect System</span><span class="sub zh">Effect system</span></h2>
-    <p class="zh">基于 <code>[SerializeReference]</code> 设计。一个技能由若干效果组合而成，每个效果定义触发时机、作用目标和结算顺序。新技能只需配置数据，不改代码。</p>
-    <p class="en">Built on <code>[SerializeReference]</code>. A skill is a list of effects, and each effect defines its trigger timing, its targets and its resolution order. New skills are pure data, with no new code.</p>
-    <div class="chips zh" aria-label="效果类型"><span>伤害</span><span>护盾</span><span>元素附着</span><span>位移</span><span>持续区域</span></div>
-    <div class="chips en" aria-label="Effect types"><span>Damage</span><span>Shield</span><span>Elemental status</span><span>Displacement</span><span>Persistent zone</span></div>
+    <p class="zh">我基于 <code>[SerializeReference]</code> 设计了这套系统。一个技能由若干效果组合而成，我为每个效果定义了触发时机、作用目标和结算顺序。</p>
+    <p class="en">I designed this system on top of <code>[SerializeReference]</code>. A skill is a combination of effects, and I defined each effect's trigger timing, targets and resolution order.</p>
+    <p class="zh">我实现了伤害、护盾、元素附着、位移、持续区域等效果类型。所有技能都由这些效果拼装配置而成，代码里没有按技能 ID 写死的逻辑，新增技能只需要配数据。</p>
+    <p class="en">I implemented the effect types the skills are built from, including damage, shields, elemental status, displacement and persistent zones. Every skill is assembled from these effects, nothing in the code is hard-coded per skill ID, and adding a skill only takes data.</p>
 
     <h2><span class="zh">策划工具</span><span class="en">Designer Tools</span><span class="sub zh">Tools</span></h2>
     <ul class="zh">
-      <li>自定义 Inspector 和批量效果生成工具，减少重复配置。</li>
-      <li>真机运行时关卡编辑器：策划可以直接在触摸桌上摆放、缩放、旋转道具区域。</li>
-      <li>布局存为 JSON，导出进构建，每局随机选用一个开局。</li>
+      <li>我编写了自定义 Inspector 和批量效果生成工具，减少重复配置。</li>
+      <li>我开发了真机运行时关卡编辑器，策划可以直接在触摸桌上摆放、缩放、旋转道具区域。</li>
+      <li>我把关卡布局存为 JSON 并导出进构建，每局开始时随机选用一个开局。</li>
     </ul>
     <ul class="en">
-      <li>Custom Inspectors and a batch effect generator that cut repetitive setup.</li>
-      <li>An on-device runtime level editor: designers place, scale and rotate prop zones directly on the touch table.</li>
-      <li>Layouts save as JSON, ship in the build, and one is picked at random at the start of each match.</li>
+      <li>I wrote custom Inspectors and a batch effect generator to cut repetitive setup.</li>
+      <li>I built an on-device runtime level editor, so designers place, scale and rotate prop zones directly on the touch table.</li>
+      <li>I save layouts as JSON and ship them in the build, and the game picks one at random at the start of each match.</li>
     </ul>
   </div>
   <nav class="pager" aria-label="Projects"><a href="#lonemask"><small><span class="zh">上一个</span><span class="en">PREVIOUS</span></small><span>A Lone Mask: Trial</span></a><a href="#alices"><small><span class="zh">下一个</span><span class="en">NEXT</span></small><span>It Takes 2 Alices</span></a></nav>
